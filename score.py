@@ -1,22 +1,34 @@
 import json
-import joblib
 import numpy as np
+import pandas as pd
+import tensorflow as tf
 from azureml.core.model import Model
+from tensorflow.keras.models import load_model
 
+# Initialize the model
 def init():
     global model
-    model_path = Model.get_model_path('stock_market_predict')  
-    model = joblib.load(model_path)
+    # Retrieve the model path from AzureML
+    model_path = Model.get_model_path('stock_market_predict')  # Replace 'my_keras_model' with your model name
+    # Load the Keras model
+    model = load_model(model_path)
 
+# Predict
 def run(raw_data):
     try:
-        data = json.loads(raw_data)['data']
-        data = np.array(data).reshape(1, -1)
+        # Convert raw data to a DataFrame
+        data = pd.read_json(raw_data)
+        
+        # Ensure data is in the right format for your model
+        # Example: If your model expects a 2D array
+        data_array = np.array(data)
 
-        # Perform prediction using the loaded scikit-learn model
-        result = model.predict(data)
+        # Make predictions
+        predictions = model.predict(data_array)
 
-        # You can return the result as a dictionary or in any desired format
-        return json.dumps({"result": result.tolist()})
+        # Convert predictions to a list and then to JSON
+        predictions_list = predictions.tolist()
+        return json.dumps(predictions_list)
     except Exception as e:
-        return json.dumps({"error": str(e)})
+        error = str(e)
+        return json.dumps({"error": error})
