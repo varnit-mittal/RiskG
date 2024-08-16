@@ -43,32 +43,7 @@ The main goal of RiskG is to leverage generative AI to:
   - `scikit-learn` for additional ML algorithms
   - `azure-openai` for integrating with Azure OpenAI
 
-## Examples
 
-1. **Stock Price Prediction**:
-   ```python
-   from tensorflow.keras.models import Sequential
-   from tensorflow.keras.layers import LSTM, Dense
-   # Define and compile your LSTM model here
-   ```
-
-2. **Credit Card Transaction Monitoring**:
-   ```python
-   from sklearn.ensemble import IsolationForest
-   # Use Isolation Forest for anomaly detection in transaction data
-   ```
-
-3. **Loan Eligibility Assessment**:
-   ```python
-   from sklearn.linear_model import LogisticRegression
-   # Train a Logistic Regression model for creditworthiness evaluation
-   ```
-
-4. **Operational Risk Prediction**:
-   ```python
-   from sklearn.ensemble import RandomForestClassifier
-   # Implement RandomForestClassifier for predicting operational risks
-   ```
 
 ## Installation
 
